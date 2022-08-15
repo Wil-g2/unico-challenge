@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api-unico:
+    container_name: api-unico
+    build: .
+    command: go run main.go
+    volumes:
+      - .:/app
+    ports:
+      - "8080:8080"
+
+  mysql:
+    container_name: mysql
+    image: mysql:5.7
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=unico
+      - MYSQL_ROOT_PASSWORD=root
+
+volumes:
+  mysql:
+  

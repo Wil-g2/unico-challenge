@@ -1,7 +1,5 @@
 package fair
 
-// ID,LONG,LAT,SETCENS,AREAP,CODDIST,DISTRITO,CODSUBPREF,SUBPREF,REGIAO5,REGIAO8,NOME_FEIRA,REGISTRO,LOGRADOURO,NUMERO,BAIRRO,REFERENCIA,,,,
-// 1,-46548146,-23568390,355030885000019,3550308005040,87,VILA FORMOSA,26,ARICANDUVA,Leste,Leste 1,PRA�A LE+O X,7216-8,RUA CODAJ-S,45,VILA FORMOSA,PRA�A  MARECHAL LEIT+O BANDEIRA,,,,
 type Fair struct {
 	ID           int     `json:"id"`
 	Long         float64 `json:"long"`
@@ -9,10 +7,10 @@ type Fair struct {
 	Setcens      string  `json:"setcens"`
 	Areap        string  `json:"areap"`
 	CodDist      int     `json:"cod_dist"`
-	Distrito     string  `json:"distrito"`
+	District     string  `json:"district"`
 	CodSubPref   int     `json:"cod_sub_pref"`
-	Regiao5      string  `json:"regiao5"`
-	Regiao8      string  `json:"regiao8"`
+	Region5      string  `json:"region_5"`
+	Region8      string  `json:"region_8"`
 	FairName     string  `json:"fair_name"`
 	Record       string  `json:"record"`
 	Street       string  `json:"street"`
@@ -26,10 +24,10 @@ func NewFair(Long float64,
 	Setcens string,
 	Areap string,
 	CodDist int,
-	Distrito string,
+	District string,
 	CodSubPref int,
-	Regiao5 string,
-	Regiao8 string,
+	Region5 string,
+	Region8 string,
 	FairName string,
 	Record string,
 	Street string,
@@ -42,10 +40,10 @@ func NewFair(Long float64,
 		Setcens:      Setcens,
 		Areap:        Areap,
 		CodDist:      CodDist,
-		Distrito:     Distrito,
+		District:     District,
 		CodSubPref:   CodSubPref,
-		Regiao5:      Regiao5,
-		Regiao8:      Regiao8,
+		Region5:      Region5,
+		Region8:      Region8,
 		FairName:     FairName,
 		Record:       Record,
 		Street:       Street,

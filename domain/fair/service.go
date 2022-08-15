@@ -1,81 +1,71 @@
 package fair
 
 import (
-	"github.com/wil-g2/unico-challenge/infra/repositories"
+	"github.com/wil-g2/unico-challenge/infra/log"
 	"github.com/wil-g2/unico-challenge/infra/validator"
 )
 
-type Service interface {
-	List() ([]Fair, error)
-	Find(id int) (Fair, error)
-	Create(input *CreateDTO) error
-	Update(id int, input *UpdateDTO) (Fair, error)
-	Delete(id int) error
-}
-
 type service struct {
-	repository repositories.FairRepository
+	repository FairRepository
 	validator  validator.Validator
 }
 
-func NewService(repository repositories.FairRepository, validator validator.Validator) Service {
+func NewService(repository FairRepository, validator validator.Validator) Service {
 	return &service{repository: repository, validator: validator}
 }
 
 // Create implements Service
 func (s *service) Create(input *CreateDTO) error {
-	fair := domain.NewFair(
+	log.Info("create method run on service file", nil)
+	err := s.validator.Validate(input)
+	if err != nil {
+		return err
+	}
+	fair := NewFair(
 		input.Long,
 		input.Lat,
 		input.Setcens,
 		input.Areap,
 		input.CodDist,
-		input.Distrito,
+		input.District,
 		input.CodSubPref,
-		input.Regiao5,
-		input.Regiao8,
+		input.Region5,
+		input.Region8,
 		input.FairName,
 		input.Record,
 		input.Street,
 		input.Number,
 		input.Neighborhood,
 		input.Reference)
-	// Long:         input.Long,
-	// Lat:          input.Lat,
-	// Setcens:      input.Setcens,
-	// Areap:        input.Areap,
-	// CodDist:      input.CodDist,
-	// Distrito:     input.Distrito,
-	// CodSubPref:   input.CodSubPref,
-	// Regiao5:      input.Regiao5,
-	// Regiao8:      input.Regiao8,
-	// FairName:     input.FairName,
-	// Record:       input.Record,
-	// Street:       input.Street,
-	// Number:       input.Number,
-	// Neighborhood: input.Neighborhood,
-	// Reference:    input.Reference,
-	// }
 	return s.repository.Create(fair)
 }
 
 // Delete implements Service
 func (s *service) Delete(id int) error {
+	log.Info("delete method run on service file", nil)
 	return s.repository.Delete(id)
 }
 
 // Find implements Service
 func (s *service) Find(id int) (Fair, error) {
+	log.Info("find method run on service file", nil)
 	return s.repository.Find(id)
 }
 
 // List implements Service
 func (s *service) List() ([]Fair, error) {
+	log.Info("list method run on service file", nil)
 	return s.repository.List()
 }
 
 // Update implements Service
 func (s *service) Update(id int, input *UpdateDTO) (Fair, error) {
+	log.Info("update method run on service file", nil)
+	err := s.validator.Validate(input)
+	if err != nil {
+		return Fair{}, err
+	}
+
 	fair, err := s.repository.Find(id)
 	if err != nil {
 		return Fair{}, err
@@ -84,7 +74,7 @@ func (s *service) Update(id int, input *UpdateDTO) (Fair, error) {
 	fair.Areap = input.Areap
 	fair.CodDist = input.CodDist
 	fair.CodSubPref = input.CodSubPref
-	fair.Distrito = input.Distrito
+	fair.District = input.District
 	fair.FairName = input.FairName
 	fair.Lat = input.Lat
 	fair.Long = input.Long
@@ -92,8 +82,8 @@ func (s *service) Update(id int, input *UpdateDTO) (Fair, error) {
 	fair.Number = input.Number
 	fair.Record = input.Record
 	fair.Reference = input.Reference
-	fair.Regiao5 = input.Regiao5
-	fair.Regiao8 = input.Regiao8
+	fair.Region5 = input.Region5
+	fair.Region8 = input.Region8
 	fair.Setcens = input.Setcens
 	fair.Street = input.Street
 
@@ -101,4 +91,10 @@ func (s *service) Update(id int, input *UpdateDTO) (Fair, error) {
 		return Fair{}, err
 	}
 	return fair, err
+}
+
+// Find Fair by Name
+func (s *service) FindByName(name string) ([]Fair, error) {
+	log.Info("find method run on service file", nil)
+	return s.repository.FindByName(name)
 }

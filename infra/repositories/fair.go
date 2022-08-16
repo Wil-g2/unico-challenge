@@ -41,10 +41,6 @@ func (r *fairRepository) Delete(id int) error {
 // FindByName implements fair.FairRepository
 func (r *fairRepository) FindByName(name string) ([]fair.Fair, error) {
 	fairs := []fair.Fair{}
-
-	// fair := fair.Fair{FairName: "PC CHARLES MULLER"}
-	// err := r.database.Debug().Where("cod_dist = ?", 26).Find(&fair.Fair{}).Error
-	r.database.Debug().Where("fair_name LIKE ?", "%CHARLES%").Find(&fairs)
-	// fairs = append(fairs, fair)
+	r.database.Where("fair_name LIKE ?", name+"%").Find(&fairs)
 	return fairs, nil
 }

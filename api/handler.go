@@ -82,8 +82,7 @@ func (h *fairHandler) Create(ctx *fiber.Ctx) error {
 		log.Error("list method run on handler file", err, nil)
 		return err
 	}
-	return nil
-	// return ctx.Status(fiber.StatusCreated).JSON(user)
+	return ctx.SendStatus(fiber.StatusCreated)
 }
 
 // Update godoc

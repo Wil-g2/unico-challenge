@@ -1,0 +1,252 @@
+definitions:
+  fair.CreateDTO:
+    properties:
+      areap:
+        type: string
+      cod_dist:
+        type: integer
+      cod_sub_pref:
+        type: integer
+      district:
+        type: string
+      fair_name:
+        type: string
+      lat:
+        type: number
+      long:
+        type: number
+      neighborhood:
+        type: string
+      number:
+        type: string
+      record:
+        type: string
+      reference:
+        type: string
+      region_5:
+        type: string
+      region_8:
+        type: string
+      setcens:
+        type: string
+      street:
+        type: string
+    required:
+    - areap
+    - cod_dist
+    - cod_sub_pref
+    - district
+    - fair_name
+    - lat
+    - long
+    - neighborhood
+    - number
+    - record
+    - reference
+    - region_5
+    - region_8
+    - setcens
+    - street
+    type: object
+  fair.Fair:
+    properties:
+      areap:
+        type: string
+      cod_dist:
+        type: integer
+      cod_sub_pref:
+        type: integer
+      district:
+        type: string
+      fair_name:
+        type: string
+      id:
+        type: integer
+      lat:
+        type: number
+      long:
+        type: number
+      neighborhood:
+        type: string
+      number:
+        type: string
+      record:
+        type: string
+      reference:
+        type: string
+      region_5:
+        type: string
+      region_8:
+        type: string
+      setcens:
+        type: string
+      street:
+        type: string
+    type: object
+  fair.UpdateDTO:
+    properties:
+      areap:
+        type: string
+      cod_dist:
+        type: integer
+      cod_sub_pref:
+        type: integer
+      district:
+        type: string
+      fair_name:
+        type: string
+      lat:
+        type: number
+      long:
+        type: number
+      neighborhood:
+        type: string
+      number:
+        type: string
+      record:
+        type: string
+      reference:
+        type: string
+      region_5:
+        type: string
+      region_8:
+        type: string
+      setcens:
+        type: string
+      street:
+        type: string
+    required:
+    - areap
+    - cod_dist
+    - cod_sub_pref
+    - district
+    - fair_name
+    - lat
+    - long
+    - neighborhood
+    - number
+    - record
+    - reference
+    - region_5
+    - region_8
+    - setcens
+    - street
+    type: object
+info:
+  contact: {}
+paths:
+  /fairs:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/fair.Fair'
+            type: array
+      summary: List fairs
+      tags:
+      - fairs
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          $ref: '#/definitions/fair.CreateDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/fair.Fair'
+      summary: Create fairs
+      tags:
+      - fairs
+  /fairs/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      summary: Delete fair
+      tags:
+      - fairs
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/fair.Fair'
+      summary: Find fair
+      tags:
+      - fairs
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: body raw
+        in: body
+        name: raw
+        required: true
+        schema:
+          $ref: '#/definitions/fair.UpdateDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/fair.Fair'
+      summary: Update fair
+      tags:
+      - fairs
+  /fairs/{name}:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/fair.Fair'
+            type: array
+      summary: List fairs by Name
+      tags:
+      - fairs
+swagger: "2.0"

@@ -1,23 +1,23 @@
 # UNICO CHALLENGE
 
-Este repositório contém a solução para desafio empresa Unico
+Este repositório contém a solução para desafio da empresa Unico
 
 ## Instalando e Executando o Projeto
 
-Para instalar as dependências do projeto pode se usar o comando abaixo
+Para instalar as dependências do projeto pode se usar o comando abaixo:
 
 ```sh
 make deps
 ```
 
-Se preferir pode utilizar o docker-compose para executar o projeto local para desenvolvimento, antes de executar comando do docker copiar o .env.example para raiz do projeto com nome de .env
+Se preferir pode utilizar o docker-compose para executar o projeto local para desenvolvimento, antes de executar comando do docker copiar o .env.example para raiz do projeto com nome de .env:
 
 ```sh
 cp .env.example .env
 docker-compose up --build
 ```
 
-Para importar os dados do arquivos `DEINFO_AB_FEIRASLIVRES_20141.csv`, usar o comando abaixo
+Para importar os dados do arquivos `DEINFO_AB_FEIRASLIVRES_20141.csv`, usar o comando abaixo:
 
 ```sh
 make run-cmd
